@@ -1,0 +1,534 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beyond The Map | Travel Journal</title>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background: #f8f7f2;
+    color: #24352c;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 8%;
+    background: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px #00000008;
+}
+
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 25px;
+    font-weight: bold;
+    color: #244b3c;
+}
+
+nav {
+    display: flex;
+    gap: 25px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #34483e;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+nav a:hover {
+    color: #bd8953;
+}
+
+.menu {
+    display: none;
+    cursor: pointer;
+    font-size: 25px;
+}
+
+.hero {
+    min-height: 85vh;
+    background:
+    linear-gradient(90deg, #10251bd9, #10251b30),
+    url('https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=1800');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    padding: 8%;
+    color: white;
+}
+
+.hero-content {
+    max-width: 650px;
+}
+
+.hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(45px, 7vw, 82px);
+    line-height: 1.12;
+    margin: 20px 0;
+}
+
+.hero p {
+    font-size: 17px;
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+.tag {
+    letter-spacing: 4px;
+    color: #e8c99e;
+    font-size: 12px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 14px 28px;
+    background: #d3a46f;
+    color: #1e3027;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: .3s;
+}
+
+.btn:hover {
+    background: white;
+    transform: translateY(-3px);
+}
+
+section {
+    padding: 85px 8%;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.section-title h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 40px;
+    margin-bottom: 12px;
+}
+
+.section-title p {
+    color: #78847c;
+    line-height: 1.7;
+}
+
+.destinations {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 25px;
+}
+
+.destination-card {
+    position: relative;
+    height: 340px;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.destination-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .5s;
+}
+
+.destination-card:hover img {
+    transform: scale(1.1);
+}
+
+.destination-info {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 25px;
+    color: white;
+    background: linear-gradient(transparent, #000c);
+}
+
+.destination-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 27px;
+}
+
+.stories {
+    background: #edf0e9;
+}
+
+.story-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 28px;
+}
+
+.story-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: .3s;
+}
+
+.story-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 12px 30px #00000012;
+}
+
+.story-card img {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+}
+
+.story-content {
+    padding: 25px;
+}
+
+.story-content small {
+    color: #b58a5d;
+    font-weight: bold;
+}
+
+.story-content h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    margin: 12px 0;
+}
+
+.story-content p {
+    color: #718078;
+    line-height: 1.7;
+    font-size: 14px;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.gallery img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: .3s;
+}
+
+.gallery img:hover {
+    transform: scale(1.02);
+}
+
+.about {
+    text-align: center;
+    max-width: 850px;
+    margin: auto;
+}
+
+.about p {
+    color: #6d7c72;
+    line-height: 2;
+    font-size: 16px;
+}
+
+.quote {
+    background: #244b3c;
+    color: white;
+    text-align: center;
+    padding: 80px 8%;
+}
+
+.quote h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(25px, 4vw, 42px);
+    max-width: 850px;
+    margin: auto;
+    line-height: 1.5;
+}
+
+footer {
+    background: #172d24;
+    color: white;
+    text-align: center;
+    padding: 35px 15px;
+}
+
+footer p {
+    color: #bdc9c0;
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+@media(max-width: 768px) {
+    nav {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: white;
+        flex-direction: column;
+        padding: 25px;
+    }
+
+    nav.active {
+        display: flex;
+    }
+
+    .menu {
+        display: block;
+    }
+
+    .hero {
+        min-height: 75vh;
+    }
+
+    .gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .gallery img {
+        height: 180px;
+    }
+
+    section {
+        padding: 65px 6%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+<header>
+    <div class="logo">BEYOND THE MAP.</div>
+
+    <nav id="navbar">
+        <a href="#home">Home</a>
+        <a href="#destinations">Destinations</a>
+        <a href="#stories">Travel Stories</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#about">About Me</a>
+    </nav>
+
+    <div class="menu" onclick="toggleMenu()">☰</div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="home">
+    <div class="hero-content">
+        <div class="tag">WELCOME TO MY TRAVEL JOURNAL</div>
+
+        <h1>The World Is Waiting. Let's Explore.</h1>
+
+        <p>
+            Every destination has a story. Every journey creates
+            a memory. Join me as I explore beautiful places,
+            discover different cultures and collect moments
+            that last forever.
+        </p>
+
+        <a href="#destinations" class="btn">
+            Explore My Journey →
+        </a>
+    </div>
+</section>
+
+<!-- DESTINATIONS -->
+<section id="destinations">
+
+    <div class="section-title">
+        <h2>Explore Destinations</h2>
+        <p>Discover the beautiful places I've dreamed of exploring.</p>
+    </div>
+
+    <div class="destinations">
+
+        <div class="destination-card">
+            <img src="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=800" alt="Switzerland">
+            <div class="destination-info">
+                <h3>Switzerland</h3>
+                <p>Mountains & magical landscapes</p>
+            </div>
+        </div>
+
+        <div class="destination-card">
+            <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=800" alt="Bali">
+            <div class="destination-info">
+                <h3>Bali</h3>
+                <p>Tropical paradise & culture</p>
+            </div>
+        </div>
+
+        <div class="destination-card">
+            <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=800" alt="Japan">
+            <div class="destination-info">
+                <h3>Japan</h3>
+                <p>Traditions & modern wonders</p>
+            </div>
+        </div>
+
+        <div class="destination-card">
+            <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=800" alt="Italy">
+            <div class="destination-info">
+                <h3>Italy</h3>
+                <p>Beautiful streets & coastlines</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- STORIES -->
+<section class="stories" id="stories">
+
+    <div class="section-title">
+        <h2>Travel Stories</h2>
+        <p>Little stories from unforgettable adventures.</p>
+    </div>
+
+    <div class="story-grid">
+
+        <article class="story-card">
+            <img src="https://images.unsplash.com/photo-1500534623283-312aade485b7?w=800" alt="Mountain journey">
+
+            <div class="story-content">
+                <small>ADVENTURE · 5 MIN READ</small>
+                <h3>Chasing Mountains</h3>
+                <p>
+                    Standing between beautiful mountains,
+                    breathing fresh air and enjoying the magic
+                    of nature. Some moments are simply priceless.
+                </p>
+            </div>
+        </article>
+
+        <article class="story-card">
+            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800" alt="Beach vacation">
+
+            <div class="story-content">
+                <small>BEACH LIFE · 4 MIN READ</small>
+                <h3>Memories by the Ocean</h3>
+                <p>
+                    The sound of waves, golden sunsets and
+                    endless horizons. A perfect escape from
+                    everyday life.
+                </p>
+            </div>
+        </article>
+
+        <article class="story-card">
+            <img src="https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=800" alt="Night sky">
+
+            <div class="story-content">
+                <small>NATURE · 6 MIN READ</small>
+                <h3>Under a Million Stars</h3>
+                <p>
+                    A quiet night under the stars reminds
+                    us how beautiful and wonderful our
+                    world really is.
+                </p>
+            </div>
+        </article>
+
+    </div>
+</section>
+
+<!-- MEMORY GALLERY -->
+<section id="gallery">
+
+    <div class="section-title">
+        <h2>Memory Gallery</h2>
+        <p>Capturing moments, one photograph at a time.</p>
+    </div>
+
+    <div class="gallery">
+        <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=700" alt="Mountains">
+        <img src="https://images.unsplash.com/photo-1473116763249-2faaef81ccda?w=700" alt="Forest">
+        <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=700" alt="Lake">
+        <img src="https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?w=700" alt="Sunrise">
+        <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=700" alt="Ocean">
+        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=700" alt="Travel landscape">
+    </div>
+
+</section>
+
+<!-- ABOUT -->
+<section id="about" style="background:#edf0e9;">
+
+    <div class="about">
+        <div class="section-title">
+            <h2>About My Journey</h2>
+            <p>A traveler at heart, a storyteller through photographs.</p>
+        </div>
+
+        <p>
+            Hello, fellow explorers! Welcome to my little corner
+            of the internet. I believe travelling is not just about
+            visiting new places. It is about experiencing different
+            cultures, meeting wonderful people, tasting new food,
+            finding hidden gems and creating beautiful memories.
+            This blog is my personal collection of journeys,
+            adventures and unforgettable experiences.
+        </p>
+
+        <br>
+
+        <a href="#gallery" class="btn">See My Memories</a>
+    </div>
+
+</section>
+
+<!-- QUOTE -->
+<div class="quote">
+    <h2>
+        "We travel not to escape life,
+        but for life not to escape us."
+    </h2>
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <h2 class="logo" style="color:white;">BEYOND THE MAP.</h2>
+    <p>Explore the world. Collect memories. Tell stories.</p>
+    <p>© 2026 Beyond The Map | Made with ❤️ by a traveler.</p>
+</footer>
+
+<script>
+function toggleMenu() {
+    document.getElementById("navbar").classList.toggle("active");
+}
+
+// Close mobile menu after selecting a link
+document.querySelectorAll("#navbar a").forEach(link => {
+    link.addEventListener("click", () => {
+        document.getElementById("navbar").classList.remove("active");
+    });
+});
+</script>
+
+</body>
+</html>
